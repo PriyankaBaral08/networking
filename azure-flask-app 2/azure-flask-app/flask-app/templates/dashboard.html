@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Demo Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Dashboard</h1>
+            <div class="user-info">
+                Logged in as: <span class="username">{{ username }}</span>
+                <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+            </div>
+        </header>
+        
+        <main>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for message in messages %}
+                            <div class="flash-message">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <div class="dashboard-content">
+                <h2>Welcome to your Dashboard, {{ username }}!</h2>
+                <div class="server-info">
+                    <h3>Server Information</h3>
+                    <table>
+                        <tr>
+                            <th>Item</th>
+                            <th>Detail</th>
+                        </tr>
+                        <tr>
+                            <td>Deployment Type</td>
+                            <td>Docker Container on Azure VM</td>
+                        </tr>
+                        <tr>
+                            <td>Infrastructure</td>
+                            <td>Provisioned with Terraform</td>
+                        </tr>
+                        <tr>
+                            <td>Configuration</td>
+                            <td>Managed with Ansible</td>
+                        </tr>
+                        <tr>
+                            <td>CI/CD Pipeline</td>
+                            <td>GitHub Actions</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Deployed using Terraform, Ansible, Docker, and GitHub Actions</p>
+        </footer>
+    </div>
+</body>
+</html>

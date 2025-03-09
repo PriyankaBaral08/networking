@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Demo Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Welcome to the Login Demo App</h1>
+        </header>
+        
+        <main>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for message in messages %}
+                            <div class="flash-message">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <div class="welcome-section">
+                <p>This is a simple demonstration application showing containerized deployment on Azure.</p>
+                <p>Please log in to access the dashboard.</p>
+                <div class="button-container">
+                    <a href="{{ url_for('login') }}" class="button">Login</a>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Deployed using Terraform, Ansible, Docker, and GitHub Actions</p>
+        </footer>
+    </div>
+</body>
+</html>

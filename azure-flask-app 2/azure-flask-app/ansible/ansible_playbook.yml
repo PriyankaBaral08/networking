@@ -1,0 +1,25 @@
+- name: Configure Azure VM and Deploy Flask App
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update and upgrade apt packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Pull Flask App Docker Image (if exists on Docker Hub)
+      command: docker pull flask-app
+
+    - name: Run Flask App container
+      command: docker run -d -p 5000:5000 flask-app
